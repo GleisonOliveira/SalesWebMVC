@@ -1,9 +1,10 @@
 ﻿using SalesWebMvc.Models.Enums;
+using SalesWebMvc.Models.Interfaces;
 using System;
 
 namespace SalesWebMvc.Models
 {
-    public class SalesRecord
+    public class SalesRecord: Imodel
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }

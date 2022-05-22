@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Models;
 using SalesWebMvc.Models.Enums;
+using SalesWebMvc.Models.Interfaces;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.Collections.Generic;
 
 namespace SalesWebMvc.Data
 {
@@ -16,11 +21,20 @@ namespace SalesWebMvc.Data
 
         public void Seed()
         {
-            if (_context.Department.Any() ||
-                _context.Seller.Any() ||
-                _context.SalesRecord.Any())
+            var models = _context
+               .GetType()
+               .GetRuntimeProperties()
+               .Where(o =>
+                   o.PropertyType.IsGenericType &&
+                   o.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>));
+
+            foreach (PropertyInfo prop in models)
             {
-                return;
+                var value = (IEnumerable<Imodel>)prop.GetValue(_context, null);
+                if(value.Count() > 0)
+                {
+                    return;
+                }
             }
 
             Department d1 = new Department(1, "Computers");

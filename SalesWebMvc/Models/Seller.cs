@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SalesWebMvc.Models.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SalesWebMvc.Models
 {
-    public class Seller
+    public class Seller: Imodel
     {
         public int Id { get; set; }
         public string Name { get; set; }
