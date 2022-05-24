@@ -1,7 +1,11 @@
-﻿@model Seller
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@model Seller
 
 @{
-    ViewData["Title"] = "Seller Details";
+    ViewData["Title"] = Localizer["Title"];
 }
 
 <h2>@ViewData["Title"]</h2>

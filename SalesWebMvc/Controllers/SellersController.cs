@@ -3,6 +3,8 @@ using SalesWebMvc.Exceptions;
 using SalesWebMvc.Models;
 using SalesWebMvc.Models.ViewModels;
 using SalesWebMvc.Services;
+using System;
+using System.Diagnostics;
 
 namespace SalesWebMvc.Controllers
 {
@@ -51,9 +53,9 @@ namespace SalesWebMvc.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (AbstractException e)
             {
-                return NotFound();
+                return RedirectToError(e);
             }
         }
 
@@ -64,15 +66,16 @@ namespace SalesWebMvc.Controllers
             {
                 return View(_sellerService.findById(id));
             }
-            catch (NotFoundException)
+            catch (AbstractException e)
             {
-                return NotFound();
+                return RedirectToError(e);
             }
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            var h = HttpContext.Request;
             try
             {
                 var seller = _sellerService.findById(id);
@@ -80,9 +83,9 @@ namespace SalesWebMvc.Controllers
 
                 return View(new SellerFormViewModel { Departments = deparments, Seller = seller });
             }
-            catch (NotFoundException)
+            catch (AbstractException e)
             {
-                return NotFound();
+                return RedirectToError(e);
             }
         }
 
@@ -96,14 +99,27 @@ namespace SalesWebMvc.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (AbstractException e)
             {
-                return NotFound();
+                return RedirectToError(e);
             }
-            catch (DBConcurrencyUpdateException)
-            {
-                return BadRequest();
-            }
+        }
+
+        public IActionResult Error(string message, int httpStatus)
+        {
+            return View(
+                new ErrorViewModel
+                {
+                    Message = message,
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    HttpStatus = httpStatus
+                }
+           );
+        }
+
+        private IActionResult RedirectToError(AbstractException e)
+        {
+            return RedirectToAction(nameof(Error), new { message = e.Message, httpStatus = e.HttpStatus });
         }
     }
 }

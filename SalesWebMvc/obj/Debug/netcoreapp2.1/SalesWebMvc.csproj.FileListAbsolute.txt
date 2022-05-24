@@ -43,3 +43,14 @@ D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\Razor\Views\Sellers\
 D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\Razor\Views\Sellers\Create.cshtml.g.cs
 D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\Razor\Views\Sellers\Details.cshtml.g.cs
 D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\Razor\Views\Sellers\Edit.cshtml.g.cs
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.csproj.GenerateResource.cache
+D:\Projetos\SalesWebMvc\SalesWebMvc\bin\Debug\netcoreapp2.1\pt-BR\SalesWebMvc.resources.dll
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Edit.pt-BR.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\pt-BR\SalesWebMvc.resources.dll
+D:\Projetos\SalesWebMvc\SalesWebMvc\bin\Debug\netcoreapp2.1\en-US\SalesWebMvc.resources.dll
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Edit.en-US.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\en-US\SalesWebMvc.resources.dll
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Create.en-US.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Create.pt-BR.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Details.en-US.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Details.pt-BR.resources

@@ -45,6 +45,11 @@
         "runtime": {
           "SalesWebMvc.dll": {}
         },
+        "resources": {
+          "pt-BR/SalesWebMvc.resources.dll": {
+            "locale": "pt-BR"
+          }
+        },
         "compile": {
           "SalesWebMvc.dll": {}
         }

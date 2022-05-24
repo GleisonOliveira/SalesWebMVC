@@ -1,39 +1,43 @@
 ﻿@using SalesWebMvc.Models.ViewModels
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
 @model SellerFormViewModel
 
 @{
-    ViewData["Title"] = "Edit seller";
+    ViewData["Title"] = Localizer["Title"];
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>@Localizer["Title"]</h2>
 
 <form asp-action="Edit">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="Seller.Name" class="control-label">Name</label>
+                <label asp-for="Seller.Name" class="control-label"></label>
                 <input asp-for="Seller.Name" type="text" placeholder="Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Seller.Email" class="control-label">Email</label>
+                <label asp-for="Seller.Email" class="control-label"></label>
                 <input asp-for="Seller.Email" type="email" placeholder="Email" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Seller.BirthDate" class="control-label">BirthDate</label>
+                <label asp-for="Seller.BirthDate" class="control-label"></label>
                 <input asp-for="Seller.BirthDate" type="date" placeholder="BirthDate" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Seller.BaseSalary" class="control-label">BaseSalary</label>
+                <label asp-for="Seller.BaseSalary" class="control-label"></label>
                 <input asp-for="Seller.BaseSalary" type="text" placeholder="BaseSalary" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Seller.DepartmentId" class="control-label">Department</label>
+                <label asp-for="Seller.DepartmentId" class="control-label"></label>
                 <select asp-for="Seller.DepartmentId" type="text" placeholder="BaseSalary" class="form-control"
                         asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
                 </select>
             </div>
-            <input type="hidden" asp-for="Seller.Id" />
-            <button type="submit" class="btn btn-primary">Salvar</button>
+             <input type="hidden" asp-for="Seller.Id" />
+            <button type="submit" class="btn btn-primary">@Localizer["Save"]</button>
         </div>
     </div>
 </form>
