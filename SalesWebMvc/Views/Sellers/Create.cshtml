@@ -1,7 +1,9 @@
-﻿@using SalesWebMvc.Models.ViewModels
+﻿@using Microsoft.Extensions.Localization
+@using SalesWebMvc.Models.ViewModels
 @using Microsoft.AspNetCore.Mvc.Localization
 
 @inject IViewLocalizer Localizer
+@inject IStringLocalizer<Shared> SharedLocalizer
 
 @model SellerFormViewModel
 
@@ -9,7 +11,7 @@
     ViewData["Title"] = Localizer["Title"];
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>@Localizer["Title"]</h2>
 
 <form asp-action="Create">
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -32,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Seller.BaseSalary" class="control-label"></label>
-                <input asp-for="Seller.BaseSalary" type="text" class="form-control" />
+                @Html.TextBoxFor(model => model.Seller.BaseSalary, new { data_val_number = SharedLocalizer["NumberFormatMessage"], @class="form-control" })
                 <span asp-validation-for="Seller.BaseSalary" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -41,6 +43,7 @@
                         asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
                 </select>
             </div>
+             <input type="hidden" asp-for="Seller.Id" />
             <button type="submit" class="btn btn-primary">@Localizer["Save"]</button>
         </div>
     </div>
@@ -48,3 +51,13 @@
 @section Scripts {
  @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+    document.addEventListener("DOMContentLoaded", function(e) {
+        var regex = @Html.Raw(SharedLocalizer["NumberFormat"]);
+      jQuery.extend(jQuery.validator.methods, {
+        number: function (value, element) {
+            return this.optional(element) || regex.test(value);
+        }
+    });
+});
+</script>

@@ -3,8 +3,8 @@ using SalesWebMvc.Exceptions;
 using SalesWebMvc.Models;
 using SalesWebMvc.Models.ViewModels;
 using SalesWebMvc.Services;
-using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SalesWebMvc.Controllers
 {
@@ -20,41 +20,39 @@ namespace SalesWebMvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _sellerService.findAll();
+            var list = await _sellerService.findAllAsync();
 
             return View(list);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var deparments = _departmentService.findAll();
-
-            return getViewWithDeparments();
+            return await getViewWithDeparmentsAsync();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Seller seller)
+        public async Task<IActionResult> Create(Seller seller)
         {
             if(!ModelState.IsValid)
             {
-                return getViewWithDeparments(seller);
+                return await getViewWithDeparmentsAsync(seller);
             }
 
-            _sellerService.insert(seller);
+            await _sellerService.insertAsync(seller);
 
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                _sellerService.remove(id);
+                await _sellerService.removeAsync(id);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -65,11 +63,11 @@ namespace SalesWebMvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             try
             {
-                return View(_sellerService.findById(id));
+                return View(await _sellerService.findByIdAsync(id));
             }
             catch (AbstractException e)
             {
@@ -78,13 +76,13 @@ namespace SalesWebMvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             try
             {
-                var seller = _sellerService.findById(id);
+                var seller = await _sellerService.findByIdAsync(id);
 
-                return getViewWithDeparments(seller);
+                return await getViewWithDeparmentsAsync(seller);
             }
             catch (AbstractException e)
             {
@@ -94,16 +92,16 @@ namespace SalesWebMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Seller seller)
+        public async Task<IActionResult> Edit(int id, Seller seller)
         {
             if (!ModelState.IsValid)
             {
-                return getViewWithDeparments(seller);
+                return await getViewWithDeparmentsAsync(seller);
             }
 
             try
             {
-                _sellerService.update(seller);
+                await _sellerService.updateAsync(seller);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -130,9 +128,9 @@ namespace SalesWebMvc.Controllers
             return RedirectToAction(nameof(Error), new { message = e.Message, httpStatus = e.HttpStatus });
         }
 
-        private ViewResult getViewWithDeparments(Seller seller = null)
+        private async Task<ViewResult> getViewWithDeparmentsAsync(Seller seller = null)
         {
-            var deparments = _departmentService.findAll();
+            var deparments = await _departmentService.findAllAsync();
 
             return View(new SellerFormViewModel { Departments = deparments, Seller = seller });
         }

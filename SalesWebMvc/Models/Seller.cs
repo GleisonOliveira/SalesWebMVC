@@ -11,15 +11,12 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
 
+        private string _email;
+
         [Display(Name = nameof(Name), Prompt = nameof(Name))]
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(255, MinimumLength = 2, ErrorMessage = "{0} must have minimum {2} and {1} characters")]
         public string Name { get; set; }
-
-        [Display(Name = nameof(Email), Prompt = nameof(Email))]
-        [Required(ErrorMessage = "{0} is required")]
-        [EmailAddress(ErrorMessage ="{0} must be a valid e-mail")]
-        public string Email { get; set; }
 
         [Display(Name = nameof(BaseSalary), Prompt = nameof(BaseSalary))]
         [Required(ErrorMessage = "{0} is required", AllowEmptyStrings = false)]
@@ -38,7 +35,14 @@ namespace SalesWebMvc.Models
 
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 
+        [Display(Name = nameof(Department))]
         public int DepartmentId { get; set; }
+
+        [Display(Name = nameof(Email), Prompt = nameof(Email))]
+        [Required(ErrorMessage = "{0} is required")]
+        [EmailAddress(ErrorMessage = "{0} must be a valid e-mail")]
+        public string Email { get => _email; set => _email = value.ToLower(); }
+
         public Seller()
         {
 
