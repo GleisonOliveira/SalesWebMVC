@@ -46,6 +46,9 @@
           "SalesWebMvc.dll": {}
         },
         "resources": {
+          "en-US/SalesWebMvc.resources.dll": {
+            "locale": "en-US"
+          },
           "pt-BR/SalesWebMvc.resources.dll": {
             "locale": "pt-BR"
           }

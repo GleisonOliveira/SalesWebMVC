@@ -32,13 +32,18 @@ namespace SalesWebMvc.Controllers
         {
             var deparments = _departmentService.findAll();
 
-            return View(new SellerFormViewModel { Departments = deparments });
+            return getViewWithDeparments();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller)
         {
+            if(!ModelState.IsValid)
+            {
+                return getViewWithDeparments(seller);
+            }
+
             _sellerService.insert(seller);
 
             return RedirectToAction(nameof(Index));
@@ -75,13 +80,11 @@ namespace SalesWebMvc.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var h = HttpContext.Request;
             try
             {
                 var seller = _sellerService.findById(id);
-                var deparments = _departmentService.findAll();
 
-                return View(new SellerFormViewModel { Departments = deparments, Seller = seller });
+                return getViewWithDeparments(seller);
             }
             catch (AbstractException e)
             {
@@ -93,6 +96,11 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                return getViewWithDeparments(seller);
+            }
+
             try
             {
                 _sellerService.update(seller);
@@ -120,6 +128,13 @@ namespace SalesWebMvc.Controllers
         private IActionResult RedirectToError(AbstractException e)
         {
             return RedirectToAction(nameof(Error), new { message = e.Message, httpStatus = e.HttpStatus });
+        }
+
+        private ViewResult getViewWithDeparments(Seller seller = null)
+        {
+            var deparments = _departmentService.findAll();
+
+            return View(new SellerFormViewModel { Departments = deparments, Seller = seller });
         }
     }
 }

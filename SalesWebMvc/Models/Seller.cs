@@ -1,4 +1,5 @@
 ﻿using SalesWebMvc.Models.Interfaces;
+using SalesWebMvc.Validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,12 +10,34 @@ namespace SalesWebMvc.Models
     public class Seller: Imodel
     {
         public int Id { get; set; }
+
+        [Display(Name = nameof(Name), Prompt = nameof(Name))]
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(255, MinimumLength = 2, ErrorMessage = "{0} must have minimum {2} and {1} characters")]
         public string Name { get; set; }
+
+        [Display(Name = nameof(Email), Prompt = nameof(Email))]
+        [Required(ErrorMessage = "{0} is required")]
+        [EmailAddress(ErrorMessage ="{0} must be a valid e-mail")]
         public string Email { get; set; }
-        public double BaseSalary { get; set; }
-        public DateTime BirthDate { get; set; }
+
+        [Display(Name = nameof(BaseSalary), Prompt = nameof(BaseSalary))]
+        [Required(ErrorMessage = "{0} is required", AllowEmptyStrings = false)]
+        [DisplayFormat(DataFormatString = "{0:F2}")]
+        [MinValue(50)]
+        public double? BaseSalary { get; set; }
+
+        [Display(Name=nameof(BirthDate), Prompt = nameof(BirthDate))]
+        [DisplayFormat(DataFormatString = "{0:d}")]
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "{0} is required")]
+        public DateTime? BirthDate { get; set; }
+
+        [Display(Name = nameof(Department))]
         public Department Department { get; set; }
+
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
+
         public int DepartmentId { get; set; }
         public Seller()
         {

@@ -54,3 +54,9 @@ D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resource
 D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Create.pt-BR.resources
 D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Details.en-US.resources
 D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Details.pt-BR.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Index.en-US.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Views.Sellers.Index.pt-BR.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Models.Seller.pt-BR.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Models.Seller.en-US.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Models.Shared.en-US.resources
+D:\Projetos\SalesWebMvc\SalesWebMvc\obj\Debug\netcoreapp2.1\SalesWebMvc.Resources.Models.Shared.pt-BR.resources
