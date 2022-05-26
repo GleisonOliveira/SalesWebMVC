@@ -54,8 +54,14 @@ namespace SalesWebMvc.Services
 
         public async Task removeAsync(int id)
         {
-            _context.Seller.Remove(await findByIdAsync(id));
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Seller.Remove(await findByIdAsync(id));
+                await _context.SaveChangesAsync();
+            } catch (DbUpdateException)
+            {
+                throw new IntegrityException("You can't delete the seller before delete all linked entities");
+            }
         }
 
         public async Task updateAsync(Seller seller)

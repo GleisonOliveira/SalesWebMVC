@@ -68,9 +68,21 @@ namespace SalesWebMvc.Models
             Sales.Remove(salesRecord);
         }
 
-        public double TotalSales(DateTime initial, DateTime final)
+        public double TotalSales(DateTime? initial, DateTime? final)
         {
-            return Sales.Where(sale => sale.Date >= initial && sale.Date <= final).Sum(sale => sale.Amount);
+            var result = from obj in Sales select obj;
+
+            if (initial.HasValue)
+            {
+                result.Where(x => x.Date >= initial);
+            }
+
+            if (initial.HasValue)
+            {
+                result.Where(x => x.Date <= final);
+            }
+
+            return result.Sum(sale => sale.Amount);
         }
     }
 }

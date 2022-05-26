@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@model IEnumerable<IGrouping<Department, SalesRecord>>
+
+@{
+    ViewData["Title"] = Localizer["Title"];
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="initialDate">@Localizer["MinDateLabel"]</label>
+                    <input type="date" class="form-control" name="initialDate" value=@ViewData["initialDate"]>
+                </div>
+                <div class="form-group">
+                    <label for="finalDate">@Localizer["MaxDateLabel"]</label>
+                    <input type="date" class="form-control" name="finalDate" value=@ViewData["finalDate"]>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">@Localizer["Search"]</button>
+        </form>
+    </div>
+</nav>
+
+@foreach (var departmentGroup in Model)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">@Localizer["Department"] @departmentGroup.Key.Name, @Localizer["Total sales"] = @departmentGroup.Key.TotalSales((DateTime?)ViewData["minDate"], (DateTime?)ViewData["maxDate"]).ToString("F2")</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="success">
+                        <th>
+                            @Localizer["Date"]
+                        </th>
+                        <th>
+                            @Localizer["Amount"]
+                        </th>
+                        <th>
+                            @Localizer["Seller"]
+                        </th>
+                        <th>
+                            @Localizer["Status"]
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in departmentGroup)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Seller.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
